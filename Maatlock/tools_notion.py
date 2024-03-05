@@ -83,8 +83,8 @@ def remove_markdown_headers_of_level(file_path, level):
 if __name__ == "__main__":
     
     # Example usage
-    input_directory = r"C:\Users\mathg\Desktop\Notion_Markdown\Tales of Orinthia f20c8bf900e440ed966f1919912ddede\Characters da77c631f3b44322b8de3c359180ca5a\Characters 57540f38a6a040b6a4cec727baf96770"
-    output_file_path = r"C:\Users\mathg\Desktop\characters.md"
+    input_directory = r"F:\docs"
+    output_file_path = r"F:\docs\notes.txt"
     combine_markdown_files(input_directory, output_file_path)
     
     # remove_markdown_headers_of_level(output_file_path, 2)
