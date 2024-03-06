@@ -1,0 +1,107 @@
+\documentclass[
+  $if(fontsize)$
+  $fontsize$,
+  $endif$
+  $if(papersize)$
+  $papersize$paper,
+  $endif$
+  twocolumn
+]{article} % Assuming article class; adjust if you're using a different class
+
+\usepackage{longtable,booktabs,array} % tables
+\usepackage{float}  %% Precise location of tables 
+\usepackage{fontspec}  % Allows specifying fonts with XeLaTeX
+\usepackage{titlesec}  % For customizing section titles
+\usepackage{titling}   % For customizing the title
+\usepackage[normalem]{ulem}      % For underlining, strikethrough, etc. (normalem to avoid underlining emphasis)
+\normalem              % Keeps emphasis (\emph) italicized, not underlined
+
+% Page layout
+\usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry} % For page layout configuration
+\usepackage[many]{tcolorbox}
+\usepackage{amsmath}
+\usepackage{amssymb}  % Provides the \square command
+\usepackage[hidelinks]{hyperref} % For handling hyperlinks
+\urlstyle{same} % ensures that the url uses the same font as the surrounding text
+\usepackage{fancyhdr} % Handle header/footers
+\pagestyle{fancy}
+
+% Set the column separation here
+\setlength{\columnsep}{0.35in} % Adjust the sep as needed
+
+% Section Numbering
+$if(numbersections)$
+\setcounter{secnumdepth}{$if(secnumdepth)$$secnumdepth$$else$5$endif$}
+$else$
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+$endif$
+
+% Define tightlist to handle list spacing, required by Pandoc conversion
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Set up fonts
+\newfontfamily\headingfont{$headingfont$} % Customize your heading font
+\defaultfontfeatures{Scale=MatchLowercase, Ligatures=TeX}
+
+$if(mainfont)$
+  \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
+$endif$
+$if(sansfont)$
+  \setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$]{$sansfont$}
+$endif$
+$if(monofont)$
+  \setmonofont[$for(monofontoptions)$$monofontoptions$$sep$,$endfor$]{$monofont$}
+$endif$
+$for(fontfamilies)$
+  \newfontfamily{$fontfamilies.name$}[$for(fontfamilies.options)$$fontfamilies.options$$sep$,$endfor$]{$fontfamilies.font$}
+$endfor$
+
+%% Underline section headers
+\usepackage{titlesec}
+\titleformat{\section}
+  {\headingfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\headingfont\Large}{\thesubsection}{1em}{\uline}
+\titleformat{\subsubsection}
+  {\headingfont\large}{\thesubsubsection}{1em}{\uline}
+  
+% Title formatting
+\pretitle{\begin{flushleft}\Large}
+\title{$title$}
+\posttitle{\par\end{flushleft}}
+\setlength{\droptitle}{-100pt}
+\preauthor{\begin{flushleft}\large}
+\author{$author$}
+\postauthor{\par\end{flushleft}}
+\predate{\begin{flushleft}\footnotesize}
+\date{}
+\postdate{\par\end{flushleft}}
+
+% Define the firstpagestyle page style
+\fancypagestyle{firstpagestyle}{
+    \fancyhf{} % Clear header and footer
+    \fancyfoot[C]{\textit{$date$}} % Set center footer content
+    \renewcommand{\headrulewidth}{0pt} % Remove header rule
+    \renewcommand{\footrulewidth}{0pt} % Add footer rule
+}
+
+% Apply the firstpagestyle to the first page
+\let\oldpagenumbering\pagenumbering
+\renewcommand{\pagenumbering}[1]{%
+  \oldpagenumbering{#1}%
+  \ifnum\value{page}=1\thispagestyle{firstpagestyle}\fi%
+}
+
+
+% Document starts
+\begin{document}
+
+\maketitle
+
+% Apply the new page style to the first page
+\thispagestyle{firstpagestyle}
+
+$body$
+
+\end{document}

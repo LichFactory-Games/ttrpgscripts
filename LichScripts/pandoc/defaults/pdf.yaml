@@ -1,0 +1,40 @@
+---
+## General options
+standalone: true
+embed-resources: true
+from: markdown+tex_math_single_backslash+wikilinks_title_after_pipe+mark+autolink_bare_uris
+output-file: output.pdf
+pdf-engine: xelatex #! use xelatex to support diverse fonts and unicode
+highlight-style: tango
+data-dir: /Users/roambot/Library/Mobile Documents/iCloud~md~obsidian/Documents/Ad Astra/z_config/pandoc  #! custom data directory, the directory containing the filters, defaults, & templates folders -- change to whatever you wish
+toc: false
+
+## Templates
+template: ${USERDATA}/session-notes.latex     #! custom template
+
+filters:
+  - ${USERDATA}/filters/column_table.lua  
+  - ${USERDATA}/filters/image.lua
+  - ${USERDATA}/filters/callout.lua
+  - ${USERDATA}/filters/shift_headings.lua
+  - ${USERDATA}/filters/link.lua
+  - ${USERDATA}/filters/div.lua
+  - ${USERDATA}/filters/preamble.lua
+  - ${USERDATA}/filters/highlight.lua
+
+# Set these according to your preferences, and be sure that the fonts you choose are available on your system
+metadata:
+  mainfont: "SF Pro Text" 
+  sansfont:               
+  sansfont:               
+  headingfont: "Cinzel Decorative Bold" 
+  sansfont:               
+  numbersections: false
+
+  # preamble-file: ../preamble.sty            #! custom preamble file, relative to the custom data directory
+
+variables:
+  geometry: # Set or remove this as you like; you may also put aother variables here as you prefer  
+    - margin=0.75in 
+  
+
